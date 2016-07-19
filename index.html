@@ -36,35 +36,12 @@
       $scope.app = "Lista Telefônica";
 
       $scope.contatos = [
-        {
-          nome: "Ricardo",
-          telefone: "974860728",
-          operadora: {
-            nome: "Vivo",
-            codigo: "15",
-            categoria: "Celular",
-            cor: "purple"
-          }
-        },
-        {
-          nome: "Renato",
-          telefone: "999689101",
-          operadora: {
-            nome: "Tim",
-            codigo: "41",
-            categoria: "Celular",
-            cor: "blue"
-          }
-        },{
-          nome: "Tatiane",
-          telefone: "975885620",
-          operadora: {
-            nome: "GVT",
-            codigo: "25",
-            categoria: "Fixo",
-            cor: "orange"
-          }
-        }
+        { nome: "Ricardo", telefone: "97486-0728", operadora: { nome: "Vivo", codigo: "15", categoria: "Celular", cor: "purple" } },
+        { nome: "Renato",  telefone: "99968-9101", operadora: { nome: "Tim", codigo: "41", categoria: "Celular", cor: "blue" } },
+        { nome: "Tatiane", telefone: "97588-5620", operadora: { nome: "GVT", codigo: "25", categoria: "Fixo", cor: "orange" } },
+        { nome: "Margareth", telefone: "9988-6666", operadora: { nome: "Oi", codigo: "14", categoria: "Celular", cor: "yellow" } },
+        { nome: "Roberto",  telefone: "3476-1280", operadora: { nome: "NET", codigo: "12", categoria: "Fixo", cor: "green" } },
+        { nome: "Rafael", telefone: "5566-5620", operadora: { nome: "GVT", codigo: "25", categoria: "Fixo", cor: "orange" } }
       ];
 
       $scope.operadoras = [
@@ -73,7 +50,8 @@
         {nome: "Tim", codigo: "41", categoria: "Celular", cor: "blue"},
         {nome: "Claro", codigo: "23", categoria: "Celular", cor: "red"},
         {nome: "GVT", codigo: "25", categoria: "Fixo", cor: "orange"},
-        {nome: "Embratel", codigo: "21", categoria: "Fixo", cor: "black"}
+        {nome: "Embratel", codigo: "21", categoria: "Fixo", cor: "black"},
+        {nome: "NET", codigo: "12", categoria: "Fixo", cor: "green"}
       ];
 
       $scope.adicionarContato = function(contato){
@@ -120,7 +98,7 @@
     </table>
     <hr>
     <form name="contatoForm">
-      <input type="text" class="form-control" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10">
+      <input type="text" class="form-control" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10" ng-maxlength="20">
       <input type="text" class="form-control" ng-model="contato.telefone" name="telefone" placeholder="Telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/">
       <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
         <option value="">Selecione a operadora</option>
@@ -133,6 +111,9 @@
       </div>
       <div class="alert alert-danger" ng-message="minlength">
         O campo nome deve ter no mínimo 10 caracteres!
+      </div>
+      <div class="alert alert-danger" ng-message="maxlength">
+        O campo nome deve ter no maximo 20 caracteres!
       </div>
     </div>
 
