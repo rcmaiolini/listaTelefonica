@@ -20,6 +20,12 @@
     .form-control {
       margin-bottom: 5px;;
     }
+    .selecionado {
+      background-color: #ccc;
+    }
+    .negrito {
+      font-weight: bold;
+    }
   </style>
 
   <script src="lib/angular/angular.js"></script>
@@ -31,29 +37,59 @@
       $scope.contatos = [
         {
           nome: "Ricardo",
-          telefone: "974860728"
+          telefone: "974860728",
+          operadora: {
+            nome: "Vivo",
+            codigo: "15",
+            categoria: "Celular",
+            cor: "purple"
+          }
         },
         {
           nome: "Renato",
-          telefone: "999689101"
+          telefone: "999689101",
+          operadora: {
+            nome: "Tim",
+            codigo: "41",
+            categoria: "Celular",
+            cor: "blue"
+          }
         },{
           nome: "Tatiane",
-          telefone: "975885620"
+          telefone: "975885620",
+          operadora: {
+            nome: "GVT",
+            codigo: "25",
+            categoria: "Fixo",
+            cor: "orange"
+          }
         }
       ];
 
       $scope.operadoras = [
-        {nome: "Oi", codigo: "14", categoria: "Celular"},
-        {nome: "Vivo", codigo: "15", categoria: "Celular"},
-        {nome: "Tim", codigo: "41", categoria: "Celular"},
-        {nome: "Claro", codigo: "23", categoria: "Celular"},
-        {nome: "GVT", codigo: "25", categoria: "Fixo"},
-        {nome: "Embratel", codigo: "21", categoria: "Fixo"}
+        {nome: "Oi", codigo: "14", categoria: "Celular", cor: "yellow"},
+        {nome: "Vivo", codigo: "15", categoria: "Celular", cor: "purple"},
+        {nome: "Tim", codigo: "41", categoria: "Celular", cor: "blue"},
+        {nome: "Claro", codigo: "23", categoria: "Celular", cor: "red"},
+        {nome: "GVT", codigo: "25", categoria: "Fixo", cor: "orange"},
+        {nome: "Embratel", codigo: "21", categoria: "Fixo", cor: "black"}
       ];
 
       $scope.adicionarContato = function(contato){
         $scope.contatos.push(contato);
         delete $scope.contato;
+      };
+
+      $scope.apagarContatos = function(contatos){
+        $scope.contatos = contatos.filter(function(contato){
+          if(!contato.selecionado) return contato;
+        });
+      };
+
+      $scope.isContatoSelecionado = function(contatos){
+        return contatos.some(function(contato){
+          return contato.selecionado;
+        });
       };
     });
   </script>
@@ -62,18 +98,20 @@
 <body ng-controller="listaTelefonicaCtrl" class="container">
   <div class="jumbotron">
     <h4>{{app}}</h4>
-    <table class="table table-striped">
+    <table class="table" ng-show="contatos.length > 0">
       <tr>
+        <th></th>
         <th>Nome</th>
         <th>Telefone</th>
         <th>Operadora</th>
         <th>Código</th>
         <th>Categoria</th>
       </tr>
-      <tr ng-repeat="contato in contatos">
+      <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos">
+        <td><input type="checkbox" ng-model="contato.selecionado"></td>
         <td>{{contato.nome}}</td>
         <td>{{contato.telefone}}</td>
-        <td>{{contato.operadora.nome}}</td>
+        <td><div ng-style="{'background-color': contato.operadora.cor}">{{contato.operadora.nome}}</div></td>
         <td>{{contato.operadora.codigo}}</td>
         <td>{{contato.operadora.categoria}}</td>
       </tr>
@@ -85,7 +123,10 @@
       <option value="">Selecione a operadora</option>
     </select>
     <button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone">Adicionar Contato</button>
+    <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-if="isContatoSelecionado(contatos)">Apagar contatos</button>
   </div>
+
+  <div ng-include="'footer.html'"></div>
 </body>
 
 </html>
