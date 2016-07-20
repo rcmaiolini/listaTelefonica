@@ -6,93 +6,23 @@
   <title>Lista Telefonica</title>
 
   <link rel="stylesheet" href="lib/bootstrap/bootstrap.css">
-  <style>
-    .jumbotron {
-      width: auto;
-      text-align: center;
-      margin-top: 20px;;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .table {
-      margin-top: 20px;
-    }
-    .table th, .table td {
-      text-align: center;
-    }
-    .form-control {
-      margin-bottom: 5px;;
-    }
-    .selecionado {
-      background-color: #ccc;
-    }
-    .negrito {
-      font-weight: bold;
-    }
-    .operadora {
-      color: #454546;
-      text-shadow: 0px 0px 5px #fff;
-    }
-  </style>
+  <link rel="stylesheet" href="css/app.css">
 
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-locale_pt-br.js"></script>
   <script src="lib/angular/angular-messages.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers/listaTelefonicaCtrl.js"></script>
 
-  <script>
-    var app = angular.module('listaTelefonica', ['ngMessages']);
-    app.controller('listaTelefonicaCtrl', function($scope){
-      $scope.app = "Lista Telefônica";
-      $scope.contatos = [
-        { nome: "Ricardo", telefone: "97486-0728", data: new Date(), operadora: { nome: "Vivo", codigo: "15", categoria: "Celular", cor: "purple", preco: 2 } },
-        { nome: "Renato",  telefone: "99968-9101", data: new Date(), operadora: { nome: "Tim", codigo: "41", categoria: "Celular", cor: "blue", preco: 3 } },
-        { nome: "Tatiane", telefone: "97588-5620", data: new Date(), operadora: { nome: "GVT", codigo: "25", categoria: "Fixo", cor: "orange", preco: 1 } },
-        { nome: "Margareth", telefone: "9988-6666", data: new Date(), operadora: { nome: "Oi", codigo: "14", categoria: "Celular", cor: "yellow", preco: 1 } },
-        { nome: "Roberto",  telefone: "3476-1280", data: new Date(), operadora: { nome: "NET", codigo: "12", categoria: "Fixo", cor: "green", preco: 2 } },
-        { nome: "Rafael", telefone: "5566-5620", data: new Date(), operadora: { nome: "Claro", codigo: "23", categoria: "Celular", cor: "red", preco: 1 } }
-      ];
-
-      $scope.operadoras = [
-        {nome: "Oi", codigo: "14", categoria: "Celular", cor: "yellow", preco: 1},
-        {nome: "Vivo", codigo: "15", categoria: "Celular", cor: "purple", preco: 2},
-        {nome: "Tim", codigo: "41", categoria: "Celular", cor: "blue", preco: 3},
-        {nome: "Claro", codigo: "23", categoria: "Celular", cor: "red", preco: 1},
-        {nome: "GVT", codigo: "25", categoria: "Fixo", cor: "orange", preco: 1},
-        {nome: "Embratel", codigo: "21", categoria: "Fixo", cor: "black", preco: 3},
-        {nome: "NET", codigo: "12", categoria: "Fixo", cor: "green", preco: 2}
-      ];
-
-      $scope.adicionarContato = function(contato){
-        $scope.contato.data = new Date();
-        $scope.contatos.push(angular.copy(contato));
-        delete $scope.contato;
-        $scope.contatoForm.$setPristine();
-      };
-
-      $scope.apagarContatos = function(contatos){
-        $scope.contatos = contatos.filter(function(contato){
-          if(!contato.selecionado) return contato;
-        });
-      };
-
-      $scope.isContatoSelecionado = function(contatos){
-        return contatos.some(function(contato){
-          return contato.selecionado;
-        });
-      };
-
-      $scope.ordenarPor = function(campo){
-        $scope.criterioDeOrdenacao = campo;
-        $scope.direcaoDaOrdenacao = !$scope.direcaoDaOrdenacao;
-      };
-    });
-  </script>
 </head>
 
 <body ng-controller="listaTelefonicaCtrl" class="container">
   <div class="jumbotron">
     <h4>{{app}}</h4>
     <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que voce esta buscando?">
+
+    <div ng-if="message.length" class="alert alert-info">{{message}}</div>
+
     <table class="table" ng-show="contatos.length > 0">
       <tr>
         <th></th>
@@ -149,7 +79,7 @@
     <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-if="isContatoSelecionado(contatos)">Apagar contatos</button>
   </div>
 
-  <div ng-include="'footer.html'"></div>
+  <div ng-include="'partials/footer.html'"></div>
 </body>
 
 </html>
