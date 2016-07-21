@@ -1,11 +1,11 @@
-app.controller('listaTelefonicaCtrl', function($scope, $http){
+app.controller('listaTelefonicaCtrl', function($scope, contatosAPI, operadorasAPI, serialGen){
   $scope.app = "Lista Telefônica";
   $scope.contatos = [];
   $scope.operadoras = [];
   $scope.message = '';
 
   var carregarContatos = function(){
-    $http.get('http://192.169.33.10:3412/contatos').success(function(data){
+    contatosAPI.getContatos().success(function(data){
       $scope.contatos = data;
     }).error(function(error){
       $scope.message = 'Aconteceu um problema! ' + error;
@@ -13,7 +13,7 @@ app.controller('listaTelefonicaCtrl', function($scope, $http){
   };
 
   var carregarOperadoras = function(){
-    $http.get('http://192.169.33.10:3412/operadoras').success(function(data){
+    operadorasAPI.getOperadoras().success(function(data){
       $scope.operadoras = data;
     }).error(function(error){
       $scope.message = 'Aconteceu um problema! ' + error;
@@ -21,11 +21,12 @@ app.controller('listaTelefonicaCtrl', function($scope, $http){
   };
 
   $scope.adicionarContato = function(contato){
+    contato.serial = serialGen.generate();
     contato.data = new Date();
-    $http.post('http://192.169.33.10:3412/contatos', contato).success(function(data){
+    contatosAPI.saveContato(contato).success(function(data){
       delete $scope.contato;
       $scope.contatoForm.$setPristine();
-      $scope.message = 'Contato inserido com sucesso!'
+      $scope.message = 'Contato inserido com sucesso!';
       carregarContatos();
     }).error(function(error){
       $scope.message = 'Aconteceu um problema! ' + error;
