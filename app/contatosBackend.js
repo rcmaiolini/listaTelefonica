@@ -5,12 +5,12 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
 
 var contatos = [
-  { nome: "Ricardo", telefone: "97486-0728", data: new Date(), operadora: { nome: "Vivo", codigo: "15", categoria: "Celular", cor: "purple", preco: 2 } },
-  { nome: "Renato",  telefone: "99968-9101", data: new Date(), operadora: { nome: "Tim", codigo: "41", categoria: "Celular", cor: "blue", preco: 3 } },
-  { nome: "Tatiane", telefone: "97588-5620", data: new Date(), operadora: { nome: "GVT", codigo: "25", categoria: "Fixo", cor: "orange", preco: 1 } },
-  { nome: "Margareth", telefone: "9988-6666", data: new Date(), operadora: { nome: "Oi", codigo: "14", categoria: "Celular", cor: "yellow", preco: 1 } },
-  { nome: "Roberto",  telefone: "3476-1280", data: new Date(), operadora: { nome: "NET", codigo: "12", categoria: "Fixo", cor: "green", preco: 2 } },
-  { nome: "Rafael", telefone: "5566-5620", data: new Date(), operadora: { nome: "Claro", codigo: "23", categoria: "Celular", cor: "red", preco: 1 } }
+  { nome: "ricardo chahud maiolini", telefone: "97486-0728", data: new Date(), operadora: { nome: "Vivo", codigo: "15", categoria: "Celular", cor: "purple", preco: 2 } },
+  { nome: "renato chahud maiolini",  telefone: "99968-9101", data: new Date(), operadora: { nome: "Tim", codigo: "41", categoria: "Celular", cor: "blue", preco: 3 } },
+  { nome: "tatiane de matos rios maiolini", telefone: "97588-5620", data: new Date(), operadora: { nome: "GVT", codigo: "25", categoria: "Fixo", cor: "orange", preco: 1 } },
+  { nome: "margareth chahud sabsud maiolini", telefone: "9988-6666", data: new Date(), operadora: { nome: "Oi", codigo: "14", categoria: "Celular", cor: "yellow", preco: 1 } },
+  { nome: "roberto maiolini filho",  telefone: "3476-1280", data: new Date(), operadora: { nome: "NET", codigo: "12", categoria: "Fixo", cor: "green", preco: 2 } },
+  { nome: "rafael tadeu Souza", telefone: "5566-5620", data: new Date(), operadora: { nome: "Claro", codigo: "23", categoria: "Celular", cor: "red", preco: 1 } }
 ];
 var operadoras = [
   {nome: "Oi", codigo: "14", categoria: "Celular", cor: "yellow", preco: 1},
