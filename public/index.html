@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="lib/bootstrap/bootstrap.css">
   <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/ui.css">
 
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-locale_pt-br.js"></script>
@@ -20,6 +21,7 @@
   <script src="js/value/configValue.js"></script>
   <script src="js/filters/nameFilter.js"></script>
   <script src="js/filters/ellipsisFilter.js"></script>
+  <script src="js/directives/uiAlertDirective.js"></script>
 
 </head>
 
@@ -28,7 +30,9 @@
     <h4>{{app}}</h4>
     <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que voce esta buscando?">
 
-    <div ng-if="message.length" class="alert alert-info">{{message}}</div>
+    <div ui-alert></div>
+
+    <!-- <div ng-if="message.length" class="alert alert-info">{{message}}</div> -->
 
     <table class="table" ng-show="contatos.length > 0">
       <tr>

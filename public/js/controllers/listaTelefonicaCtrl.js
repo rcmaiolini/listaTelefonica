@@ -6,9 +6,12 @@ app.controller('listaTelefonicaCtrl', function($scope, contatosAPI, operadorasAP
 
   var carregarContatos = function(){
     contatosAPI.getContatos().success(function(data){
+      data.forEach(function(item){
+        item.serial = serialGen.generate();
+      });
       $scope.contatos = data;
     }).error(function(error){
-      $scope.message = 'Aconteceu um problema! ' + error;
+      $scope.message = 'Não foi possivel carregar os daos! ' + error;
     });
   };
 
