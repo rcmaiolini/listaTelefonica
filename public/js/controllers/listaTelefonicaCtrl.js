@@ -2,7 +2,9 @@ app.controller('listaTelefonicaCtrl', function($scope, contatosAPI, operadorasAP
   $scope.app = "Lista Telefônica";
   $scope.contatos = [];
   $scope.operadoras = [];
-  $scope.message = '';
+  $scope.contato = {
+		data: new Date()
+	};
 
   var carregarContatos = function(){
     contatosAPI.getContatos().success(function(data){
@@ -10,29 +12,23 @@ app.controller('listaTelefonicaCtrl', function($scope, contatosAPI, operadorasAP
         item.serial = serialGen.generate();
       });
       $scope.contatos = data;
-    }).error(function(error){
-      $scope.message = 'Não foi possivel carregar os daos! ' + error;
+    }).error(function(data){
+      $scope.error = 'Não foi possivel carregar os dados!';
     });
   };
 
   var carregarOperadoras = function(){
     operadorasAPI.getOperadoras().success(function(data){
       $scope.operadoras = data;
-    }).error(function(error){
-      $scope.message = 'Aconteceu um problema! ' + error;
     });
   };
 
   $scope.adicionarContato = function(contato){
     contato.serial = serialGen.generate();
-    contato.data = new Date();
     contatosAPI.saveContato(contato).success(function(data){
       delete $scope.contato;
       $scope.contatoForm.$setPristine();
-      $scope.message = 'Contato inserido com sucesso!';
       carregarContatos();
-    }).error(function(error){
-      $scope.message = 'Aconteceu um problema! ' + error;
     });
   };
 
