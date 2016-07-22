@@ -1,5 +1,7 @@
 //Criação de serviços configuraveis - usar sempre this.$get
-app.provider('serialGen', function(config){
+var serialGen = angular.module('serialGen', []);
+
+serialGen.provider('serialGen', function(){
   //console.log(config);
   var _length = '';
 
