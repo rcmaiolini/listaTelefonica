@@ -1,4 +1,4 @@
-app.controller('listaTelefonicaCtrl', function($scope, contatos, serialGen){
+app.controller('listaTelefonicaCtrl', function($scope, contatos, serialGen, idGen){
   $scope.contatos = contatos.data;
 
   var gerarSerial = function(contatos){

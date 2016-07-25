@@ -1,12 +1,26 @@
-<table class="table">
+<table class="table table-striped">
+	<tr>
+		<td>{{contato.id}}</td>
+	</tr>
 	<tr>
 		<td>{{contato.nome}}</td>
-	</tr>
 	<tr>
 		<td>{{contato.telefone}}</td>
 	</tr>
 	<tr>
-		<td>{{contato.data | date:"dd/MM/yyyy"}}</td>
+		<td><div class="operadora" ng-style="{'background-color': contato.operadora.cor}">{{contato.operadora.nome | uppercase}}</div></td>
+	</tr>
+	<tr>
+		<td>{{contato.operadora.codigo}}</td>
+	</tr>
+	<tr>
+		<td>{{contato.operadora.categoria}}</td>
+	</tr>
+	<tr>
+		<td>{{contato.operadora.preco | currency}}</td>
+	</tr>
+	<tr>
+		<td>{{contato.data | date:'dd/MM/yyyy'}}</td>
 	</tr>
 </table>
 <a href="#/contatos">Voltar</a>
