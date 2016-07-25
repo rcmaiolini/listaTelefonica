@@ -1,4 +1,4 @@
-<ui-accordions>
+<!-- <ui-accordions>
   <ui-accordion title="Accordion 1">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum debitis aliquam officia dolore ducimus sit magnam, saepe earum quo impedit cumque consequuntur magni accusamus natus ratione dolorum velit quos minima.
   </ui-accordion>
@@ -11,7 +11,7 @@
   <ui-accordion title="Accordion 4">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </ui-accordion>
-</ui-accordions>
+</ui-accordions> -->
 
 <hr>
 
@@ -34,7 +34,7 @@
   <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter:{nome:criterioDeBusca} | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
     <td><input type="checkbox" ng-model="contato.selecionado"></td>
     <td>{{contato.serial}}</td>
-    <td><a href="#/detalhesContato/{{contato.id}}">{{contato.nome | name | ellipsis:20}}</a></td>
+    <td><a href="/detalhesContato/{{contato.id}}">{{contato.nome | name | ellipsis:20}}</a></td>
     <td>{{contato.telefone}}</td>
     <td><div class="operadora" ng-style="{'background-color': contato.operadora.cor}">{{contato.operadora.nome | uppercase}}</div></td>
     <td>{{contato.operadora.codigo}}</td>
@@ -45,4 +45,5 @@
 </table>
 <hr>
 
-<a href="#/novoContato" class="btn btn-primary btn-block">Novo Contato</a>
+<button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-if="isContatoSelecionado(contatos)">Apagar contatos</button>
+<a href="/novoContato" class="btn btn-primary btn-block">Novo Contato</a>

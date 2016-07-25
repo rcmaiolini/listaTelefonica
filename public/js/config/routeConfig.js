@@ -1,5 +1,10 @@
-app.config(function($routeProvider){
-  $routeProvider.when('/contatos', {
+app.config(function($routeProvider, $locationProvider){
+
+  $routeProvider
+  .when('/', {
+    redirectTo: '/contatos'
+  })
+  .when('/contatos', {
     templateUrl: 'partials/contatos.html',
     controller: 'listaTelefonicaCtrl',
     resolve: {
@@ -7,8 +12,8 @@ app.config(function($routeProvider){
         return contatosAPI.getContatos();
       }
     }
-  });
-  $routeProvider.when('/novoContato', {
+  })
+  .when('/novoContato', {
     templateUrl: 'partials/novoContato.html',
     controller: 'novoContatoCtrl',
     resolve: {
@@ -16,8 +21,8 @@ app.config(function($routeProvider){
         return operadorasAPI.getOperadoras();
       }
     }
-  });
-  $routeProvider.when("/detalhesContato/:id", {
+  })
+  .when("/detalhesContato/:id", {
 		templateUrl: "partials/detalhesContato.html",
 		controller: "detalhesContatoCtrl",
 		resolve: {
@@ -25,6 +30,12 @@ app.config(function($routeProvider){
 				return contatosAPI.getContato($route.current.params.id);
 			}
 		}
-	});
-  $routeProvider.otherwise({redirectTo: '/contatos'});
+	})
+  .when("/error", {
+		templateUrl: "partials/error.html"
+	})
+  .otherwise({redirectTo: '/'});
+
+  $locationProvider.html5Mode(true);
+  $locationProvider.hashPrefix('!');
 });
