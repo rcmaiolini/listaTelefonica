@@ -1,5 +1,22 @@
+<h4>{{app}}</h4>
 <form name="contatoForm">
-  <input type="text" class="form-control" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10" ng-maxlength="20">
+  <select class="form-control" ng-model="contato.tipo">
+		<option value="">Selecione o tipo</option>
+		<option>Pessoa Física</option>
+		<option>Pessoa Jurídica</option>
+	</select>
+
+	<div ng-show="contato.tipo === 'Pessoa Física'">
+		<input class="form-control" type="text" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10"/>
+		<input class="form-control" type="text" ng-model="contato.cpf" name="cpf" placeholder="CPF" ng-required="true"/>
+	</div>
+
+	<div ng-show="contato.tipo === 'Pessoa Jurídica'">
+		<input class="form-control" type="text" ng-model="contato.nomeFantasia" name="nomeFantasia" placeholder="Nome Fantasia" ng-required="true" ng-minlength="10"/>
+		<input class="form-control" type="text" ng-model="contato.cnpj" name="cnpj" placeholder="CNPJ" ng-required="true"/>
+		<input class="form-control" type="text" ng-model="contato.razaoSocial" name="razaoSocial" placeholder="Razão Social" ng-required="true"/>
+	</div>
+
   <input type="text" class="form-control" ng-model="contato.telefone" name="telefone" placeholder="Telefone" ng-pattern="/^\d{4,5}-\d{4}$/" ui-phone>
   <input type="text" class="form-control" ng-model="contato.data" name="data" placeholder="Data" ui-date>
   <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome + ' (' + (operadora.preco | currency) + ')' group by operadora.categoria for operadora in operadoras | orderBy:'nome'">

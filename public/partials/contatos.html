@@ -12,6 +12,12 @@
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </ui-accordion>
 </ui-accordions> -->
+<button class="btn btn-primary" ng-click="showImage=!showImage">Show/Hide Image</button>
+<div ng-if="showImage">
+	<img ng-src="img/agilecode.png"/>
+</div>
+
+<h4>{{app}}</h4>
 
 <hr>
 
@@ -31,7 +37,7 @@
     <th><a href="" ng-click="ordenarPor('operadora.preco')">Valor/Minuto</a></th>
     <th><a href="" ng-click="ordenarPor('data')">Data</a></th>
   </tr>
-  <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter:{nome:criterioDeBusca} | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
+  <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter:{nome:criterioDeBusca} | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao track by contato.id">
     <td><input type="checkbox" ng-model="contato.selecionado" ng-click="verificarContatoSelecionado(contatos)"></td>
     <td>{{::contato.serial}}</td>
     <td><a href="#/detalhesContato/{{contato.id + 1}}">{{::contato.nome | name | ellipsis:20}}</a></td>
@@ -43,6 +49,9 @@
     <td>{{::contato.data | date:'dd/MM/yyyy'}}</td>
   </tr>
 </table>
+
+<button class="btn btn-primary" ng-click="reset()">Reset</button>
+
 <hr>
 
 <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-if="hasContatoSelecionado">Apagar contatos</button>

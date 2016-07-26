@@ -1,4 +1,5 @@
-app.controller('listaTelefonicaCtrl', function($scope, contatos, serialGen, idGen){
+app.controller('listaTelefonicaCtrl', function($scope, contatos, serialGen, idGen, $filter){
+  $scope.app = $filter('upper')("Lista Telefonica");
   $scope.contatos = contatos.data;
 
   var init = function(){
@@ -40,6 +41,10 @@ app.controller('listaTelefonicaCtrl', function($scope, contatos, serialGen, idGe
   var imposto = 1.2;
     return preco * imposto;
   };
+
+  $scope.reset = function () {
+		$scope.contatos = angular.copy($scope.contatos);
+	};
 
   init();
 });

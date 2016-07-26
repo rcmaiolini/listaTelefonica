@@ -1,4 +1,5 @@
-app.controller('novoContatoCtrl', function($scope, contatosAPI, serialGen, $location, operadoras, idGen){
+app.controller('novoContatoCtrl', function($scope, contatosAPI, serialGen, $location, operadoras, idGen, $filter){
+  $scope.app = $filter('upper')("Lista Telefonica");
   $scope.operadoras = operadoras.data;
   $scope.contato = {
 		data: new Date()
