@@ -33,17 +33,22 @@
   <script src="js/directives/uiDateDirective.js"></script>
   <script src="js/directives/uiPhoneDirective.js"></script>
   <script src="js/interceptors/timestampInterceptor.js"></script>
+  <script src="js/interceptors/errorInterceptor.js"></script>
+  <script src="js/interceptors/loadingInterceptor.js"></script>
   <script src="js/config/interceptorsConfig.js"></script>
 
 
 </head>
 
 <body class="container">
-
-  <div class="jumbotron">
-    <h4>Lista Telefônica</h4>
-
-    <ng-view></ng-view>
+  <div class="jumbotron" ng-show="loading">
+    <h5>Carregando, por favor aguarde...</h5>
+  </div>
+  <div ng-hide="loading">
+    <div class="jumbotron">
+      <h4>Lista Telefônica</h4>
+      <ng-view></ng-view>
+    </div>
   </div>
 
   <div ng-include="'partials/footer.html'"></div>

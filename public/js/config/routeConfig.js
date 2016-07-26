@@ -33,7 +33,7 @@ app.config(function($routeProvider, $locationProvider){
   $routeProvider.when("/error", {
 		templateUrl: "partials/error.html"
 	});
-  $routeProvider.otherwise({redirectTo: '/'});
+  $routeProvider.otherwise({redirectTo: '/contatos'});
 
   //$locationProvider.html5Mode(true);
 });
