@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="listaTelefonica">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Lista Telefonica</title>
+
+  <link rel="stylesheet" href="css/styles.min.css">
+
+  <script src="js/all.min.js"></script>
+</head>
+
+<body class="container">
+  <div class="jumbotron" ng-show="loading">
+    <h5>Carregando, por favor aguarde...</h5>
+  </div>
+  <div ng-hide="loading">
+    <div class="jumbotron">
+      <ng-view></ng-view>
+    </div>
+  </div>
+
+  <div ng-include="'view/footer.html'"></div>
+</body>
+
+</html>
