@@ -63,6 +63,16 @@ module.exports = function (grunt) {
             src: 'index-prod.html',
             dest: 'dist/index.html'
         }
+    },
+    browserSync: {
+      bsFiles: {
+        src : ['css/*.css', 'view/*.html', 'js/*.js']
+      },
+      options: {
+        server: {
+            baseDir: "./"
+        }
+      }
     }
   });
 
@@ -73,6 +83,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-browser-sync');
 
   grunt.registerTask('prod', ['clean:all', 'jshint', 'concat:scripts', 'uglify', 'concat:libs', 'concat:all', 'cssmin', 'htmlmin', 'copy', 'clean:temp']);
 };
